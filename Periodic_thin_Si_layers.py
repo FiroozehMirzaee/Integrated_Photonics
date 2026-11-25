@@ -54,16 +54,36 @@ for m, wavelength in enumerate(lam):
     rho[m] = np.abs(M[0, 1] / M[1, 1]) ** 2
 
 # Plot
+# --- Figure 1: Plot vs. Wavelength (nm) ---
 plt.figure(figsize=(9, 5))
 plt.plot(lam, tau, linewidth=1.5, label=r'Transmission $\tau$')
 plt.plot(lam, rho, linewidth=1.5, label=r'Reflection $\rho$')
 
 plt.xlabel('Wavelength (nm)')
 plt.ylabel('Power coefficient')
-plt.title('30 Ultrathin Silicon Layers Separated by Air')
+plt.title('30 Ultrathin Silicon Layers Separated by Air (vs. Wavelength)')
 plt.legend()
 plt.grid(True)
 plt.ylim([0, 1.05])
 plt.xlim([200, 3000])
 plt.tight_layout()
+
+# --- Figure 2: Plot vs. Wavenumber k0 (1/nm or 1/um) ---
+k0_arr = 2 * np.pi / lam   # Wavenumber in rad/nm (multiply by 1000 for rad/um)
+
+plt.figure(figsize=(9, 5))
+plt.plot(k0_arr, tau, linewidth=1.5, label=r'Transmission $\tau$')
+plt.plot(k0_arr, rho, linewidth=1.5, label=r'Reflection $\rho$')
+
+plt.xlabel(r'Wavenumber $k_0$ ($\mathrm{nm}^{-1}$)')
+plt.ylabel('Power coefficient')
+plt.title('30 Ultrathin Silicon Layers Separated by Air (vs. Wavenumber)')
+plt.legend()
+plt.grid(True)
+plt.ylim([0, 1.05])
+plt.xlim([np.min(k0_arr), np.max(k0_arr)])
+plt.tight_layout()
+
+# Show both figures at the same time
 plt.show()
+
